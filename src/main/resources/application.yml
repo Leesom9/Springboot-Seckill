@@ -1,1 +1,29 @@
+server:
+  port: 8080
 
+spring:
+  datasource:
+    name: springboot
+    type: com.alibaba.druid.pool.DruidDataSource
+    #druid相关配置
+    druid:
+      #监控统计 拦截的filters
+      filter: stat
+      #mysql驱动
+      driver-class-name: com.mysql.jdbc.Driver
+      #基本属性
+      url: jdbc:mysql://localhost:3306/seckillNew?useUnicode=true&characterEcoding=UTF-8&allowMultiQueries=true
+      username: root
+      password: 123
+      #配置初始化大小
+      initial-size: 1
+      min-idle: 1
+      max-active: 20
+      #获取连接等待时间
+      max-wait: 60000
+      #间隔多久进行一次检测，关闭空闲连接
+      time-between-eviction-runs-millis: 60000
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.lx.seckill.entity
