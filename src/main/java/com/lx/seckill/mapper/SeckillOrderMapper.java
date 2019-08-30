@@ -1,6 +1,7 @@
 package com.lx.seckill.mapper;
 
 import com.lx.seckill.entity.SeckillOrder;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
  * @modified By：
  * @version: $
  */
+@Mapper
 public interface SeckillOrderMapper {
 
     /***

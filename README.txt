@@ -30,3 +30,24 @@
     │           ├── page
     │           └── public  -- HTML页面公共组件（头部、尾部）
     └── test  -- 测试文件
+
+mybatis的一些特殊符号标识
+特殊字符   替代符号（红色基本为常用的）
+
+     &            &amp;
+
+     <            &lt;
+
+     >            &gt;
+
+     "             &quot;
+
+     '              &apos;
+
+
+
+小于等于    a<=b                 a &lt;= b      a <![CDATA[<= ]]>b
+
+大于等于    a>=b                 a &gt;= b      a <![CDATA[>= ]]>b
+
+不等于        a!=ba <![CDATA[ <> ]]>b      a <![CDATA[!= ]]>b

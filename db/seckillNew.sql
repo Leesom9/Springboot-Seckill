@@ -24,7 +24,7 @@ CREATE TABLE `seckill`(
     KEY `idx_create_time` (`create_time`)
 )CHARSET=UTF8 AUTO_INCREMENT=1000 ENGINE=InnoDB COMMENT '秒杀商品表';
 
-  --初始化数据
+--初始化数据
   insert into seckill
     (title,image,price,kill_price,stock_count,start_time,end_time)
   values
@@ -43,3 +43,6 @@ CREATE TABLE `seckill_order`(
     PRIMARY KEY (seckill_id,user_phone) ,/* 联合主键*/
     key `idx_create_time`(create_time)
   )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='秒杀成功明细表';
+
+--InnoDB是支持事务的，且InnoDB相比MyISAM在并发上更具有高性能的优点。
+--Mybatis会自动为tinyint类型的数据转换成true或false（0:false; 1 or 1+:true）。

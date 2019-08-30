@@ -2,6 +2,7 @@ package com.lx.seckill.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -14,6 +15,7 @@ import java.util.Date;
  * @modified By：
  * @version: $
  */
+@Repository
 public class Seckill implements Serializable {
 
     //秒杀商品ID

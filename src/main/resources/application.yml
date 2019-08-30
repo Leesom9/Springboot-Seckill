@@ -12,7 +12,7 @@ spring:
       #mysql驱动
       driver-class-name: com.mysql.jdbc.Driver
       #基本属性
-      url: jdbc:mysql://localhost:3306/seckillNew?useUnicode=true&characterEcoding=UTF-8&allowMultiQueries=true
+      url: jdbc:mysql://localhost:3306/seckillNew?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&?zeroDateTimeBehavior=convertToNull
       username: root
       password: 123
       #配置初始化大小
@@ -27,3 +27,10 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.lx.seckill.entity
+  configuration:
+    # 使用jdbc的getGeneratedKeys 可以获取数据库自增主键值
+    use-generated-keys: true
+    # 使用列别名替换列名，默认true。如：select name as title from table
+    use-column-label: true
+    # 开启驼峰命名转换，如：Table(create_time) -> Entity(createTime)。不需要我们关心怎么进行字段匹配，mybatis会自动识别`大写字母与下划线`
+    map-underscore-to-camel-case: true

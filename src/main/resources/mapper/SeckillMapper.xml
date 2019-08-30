@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lx.seckill.mapper.SeckillMapper">
+    <select id="queryAll" resultType="Seckill">
+        SELECT * FROM seckill
+    </select>
+
+    <select id="queryById" resultType="Seckill">
+        SELECT
+            seckill_id,title,image,price,kill_price,
+            stock_count,start_time,end_time,create_time
+        FROM
+            seckill
+        WHERE
+            seckill_id = #{seckillId}
+    </select>
+
+    <select id="queryByOffset" resultType="Seckill">
+        SELECT
+            seckill_id,title,image,price,kill_price,
+            stock_count,start_time,end_time,create_time
+        FROM
+            seckill
+        ORDER BY create_time DESC
+        limit #{offset},#{limit}
+    </select>
+
+    <update id="reduceStock">
+        UPDATE
+            seckill
+        SET
+            stock_count = stock_count - 1
+        WHERE
+            seckill_id = #{seckillId}
+        AND start_time <![CDATA[<=]]> #{killTime}
+        AND end_time   <![CDATA[>=]]> #{killTime}
+        AND stock_count > 0
+    </update>
+</mapper>
