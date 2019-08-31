@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    name: springboot
+    name: seckillNew
     type: com.alibaba.druid.pool.DruidDataSource
     #druid相关配置
     druid:
@@ -32,5 +32,11 @@ mybatis:
     use-generated-keys: true
     # 使用列别名替换列名，默认true。如：select name as title from table
     use-column-label: true
-    # 开启驼峰命名转换，如：Table(create_time) -> Entity(createTime)。不需要我们关心怎么进行字段匹配，mybatis会自动识别`大写字母与下划线`
+    # 开启驼峰命名转换，如：Table(create_time) -> Entity(createTime)。
+    #不需要我们关心怎么进行字段匹配，mybatis会自动识别`大写字母与下划线`
     map-underscore-to-camel-case: true
+
+# 打印sql
+logging:
+  level:
+    cn.tycoding.mapper: DEBUG

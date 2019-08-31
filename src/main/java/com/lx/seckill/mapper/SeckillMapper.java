@@ -44,5 +44,5 @@ public interface SeckillMapper {
      * @param killTime
      * @return
      */
-    int reduceStock(@Param("seckillID") long seckillId, @Param("killTime")Date killTime);
+    int reduceStock(@Param("seckillId") long seckillId, @Param("killTime")Date killTime);
 }

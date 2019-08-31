@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.lx.seckill.mapper.SeckillOrderMapper">
 
     <insert id="insertOrder">
@@ -10,7 +10,7 @@
             (#{seckillId},#{userPhone},#{money})
     </insert>
 
-    <select id="findById" resultType="SeckillOrder">
+    <select id="queryByIdWithSeckill" resultType="SeckillOrder">
         SELECT
           so.seckill_id,
           so.user_phone,
