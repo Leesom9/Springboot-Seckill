@@ -3,6 +3,7 @@ package com.lx.seckill.mapper;
 import com.lx.seckill.entity.Seckill;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  * @modified By：
  * @version: $
  */
-@Mapper
+@Repository
 public interface SeckillMapper {
 
     /***

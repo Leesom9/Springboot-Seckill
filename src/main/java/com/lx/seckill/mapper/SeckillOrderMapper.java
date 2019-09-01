@@ -3,6 +3,7 @@ package com.lx.seckill.mapper;
 import com.lx.seckill.entity.SeckillOrder;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 
@@ -13,7 +14,7 @@ import java.math.BigDecimal;
  * @modified By：
  * @version: $
  */
-@Mapper
+@Repository
 public interface SeckillOrderMapper {
 
     /***
