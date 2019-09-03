@@ -51,3 +51,35 @@ mybatis的一些特殊符号标识
 大于等于    a>=b                 a &gt;= b      a <![CDATA[>= ]]>b
 
 不等于        a!=ba <![CDATA[ <> ]]>b      a <![CDATA[!= ]]>b
+------------------------------------------------------------------------------------------------------------------------
+2019-09-04 00:50
+记一次错误
+
+日志：
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jedisConfig': Injection of autowired dependencies failed; nested exception is java.lang.IllegalArgumentException: Could not resolve placeholder 'spring.redis.host' in value "${spring.redis.host}"
+
+原因：
+application.yml文件缩进问题导致无法将参数注入到jedisPool
+
+例子：
+@Value("${spring.redis.host}")
+
+检查发现是配置文件当中的配置格式问题,配置文件中缩进影响的,
+
+类似于之前为:
+
+spring:
+
+    redis:
+
+    host:*********************
+
+这样会将item和url识别为同一级别
+
+正确为:
+
+spring:
+
+    redis:
+
+        host:*********************

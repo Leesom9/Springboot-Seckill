@@ -75,6 +75,17 @@
             <artifactId>jedis</artifactId>
         </dependency>
 
+        <!-- 引用yml文件依赖 -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- junit测试-->
         <dependency>
             <groupId>junit</groupId>

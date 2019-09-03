@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
@@ -21,7 +22,7 @@ public class JedisConfig {
 private Logger logger = LoggerFactory.getLogger(JedisConfig.class);
 
 @Value("${spring.redis.host}")
- String host;
+private String host;
 
 @Value("${spring.redis.port}")
 private int port;
