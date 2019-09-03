@@ -15,6 +15,7 @@ import com.lx.seckill.service.SeckillService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
@@ -46,16 +47,30 @@ public class SeckillServiceImpl implements SeckillService {
     private SeckillOrderMapper seckillOrderMapper;
 
     @Autowired
-    private RedisTemplateConfig redisTemplateConfig;
+    private RedisTemplate redisTemplate;
 
     private final String redisKey = "seckill";
 
     @Override
     public List<Seckill> queryAll() {
 
-        List<Seckill> seckills = seckillMapper.queryAll();
+        List<Seckill> seckillList = redisTemplate.boundHashOps(redisKey).values();
 
-        return seckills;
+        if(seckillList == null || seckillList.size() == 0){
+            //redis中没有数据
+            seckillList = seckillMapper.queryAll();
+            for(Seckill seckill:seckillList){
+
+                redisTemplate.boundHashOps(redisKey).put(seckill.getSeckillId(),seckill);
+            }
+            logger.info("将数据库读取的数据放入缓存");
+        }else{
+            logger.info("findAll -> 从数据库中读取数据");
+        }
+
+                seckillMapper.queryAll();
+
+        return seckillList;
     }
 
     @Override
@@ -69,10 +84,18 @@ public class SeckillServiceImpl implements SeckillService {
     @Override
     public Exposer exportSeckillUrl(long seckillId) {
 
-        Seckill seckill = seckillMapper.queryById(seckillId);
+        Seckill seckill = (Seckill) redisTemplate.boundHashOps(redisKey).get(seckillId);
 
         if(seckill == null){
-            return new Exposer(false,seckillId);
+            seckill = seckillMapper.queryById(seckillId);
+
+            if(seckill == null){
+                return new Exposer(false,seckillId);
+            }
+            redisTemplate.boundHashOps(redisKey).put(seckill.getSeckillId(),seckill);
+            logger.info("RedisTemplate -> 从数据库中读取并放入缓存中");
+        }else {
+            logger.info("RedisTemplate -> 从缓存中读取");
         }
 
         Date startTime = seckill.getStartTime();
@@ -124,6 +147,12 @@ public class SeckillServiceImpl implements SeckillService {
                 }else{
                     //秒杀成功
                     SeckillOrder seckillOrder = seckillOrderMapper.queryByIdWithSeckill(seckillId,userPhone);
+
+                    //更新缓存
+                    Seckill seckill = (Seckill) redisTemplate.boundHashOps(redisKey).get(seckillId);
+                    seckill.setStockCount(seckill.getStockCount()-1);
+                    redisTemplate.boundHashOps(redisKey).put(seckill.getSeckillId(),seckill);
+
                     return new SeckillExecution(seckillId, SeckillStatEnum.SUCCESS,seckillOrder.getSeckill());
                 }
             }
