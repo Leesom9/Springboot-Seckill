@@ -9,38 +9,38 @@ package com.lx.seckill.dto;
  */
 public class SeckillResult<T> {
 
-    private boolean result;
+    private boolean success;
 
-    private T date;
+    private T data;
 
     private String error;
 
     //执行成功，返回数据
-    public SeckillResult(boolean result, T date) {
-        this.result = result;
-        this.date = date;
+    public SeckillResult(boolean success, T data) {
+        this.success = success;
+        this.data = data;
     }
 
     //执行失败，返回原因
-    public SeckillResult(boolean result, String error) {
-        this.result = result;
+    public SeckillResult(boolean success, String error) {
+        this.success = success;
         this.error = error;
     }
 
-    public boolean isResult() {
-        return result;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public void setResult(boolean result) {
-        this.result = result;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
-    public T getDate() {
-        return date;
+    public T getData() {
+        return data;
     }
 
-    public void setDate(T date) {
-        this.date = date;
+    public void setData(T data) {
+        this.data = data;
     }
 
     public String getError() {

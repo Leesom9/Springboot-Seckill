@@ -42,25 +42,25 @@ public class SeckillController {
         List<Seckill> seckillList = seckillService.queryAll();
         model.addAttribute("seckillList",seckillList);
 
-        return "list";
+        return "page/list";
     }
 
     @RequestMapping(value = "/{seckillId}/detail", method = RequestMethod.GET)
     private String SeckillDetail(@PathVariable("seckillId") Long seckillId, Model model){
 
         if(null == seckillId){
-            return "redirect:/seckill/list";
+            return "redirect:page/list";
         }
 
         Seckill seckill = seckillService.queryById(seckillId);
 
         if(null == seckill){
-            return "forward:/seckill/list";
+            return "forward:page/list";
         }
 
         model.addAttribute("seckill",seckill);
 
-        return "detial";
+        return "page/detail";
     }
 
     @RequestMapping(value = "{seckillId}/exposer",
@@ -82,6 +82,10 @@ public class SeckillController {
         return result;
     }
 
+    @RequestMapping(value = "{seckillId}/{md5}/execution",
+            method = RequestMethod.POST,
+            produces = {"application/json;charset=UTF-8"})
+    @ResponseBody
     public SeckillResult<SeckillExecution> execute(@PathVariable("seckillId") Long seckillId,
                                                    @PathVariable("md5") String md5,
                                                    @PathVariable("money") BigDecimal money,
@@ -110,10 +114,10 @@ public class SeckillController {
         }
     }
 
-    @RequestMapping(value = "/time/now", method = RequestMethod.GET, produces = {"application/json;charset=UTF-8"})
+    @RequestMapping(value = "/time/now")
     @ResponseBody
     public SeckillResult<Long> time(){
         Date now = new Date();
-        return new SeckillResult<Long>(true,now.getTime());
+        return new SeckillResult(true,now.getTime());
     }
 }

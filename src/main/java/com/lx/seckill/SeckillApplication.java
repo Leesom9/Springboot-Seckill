@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan(basePackages = {"com.lx.seckill.mapper"})
-public class SeckillApplication {
+public class SeckillApplication{
 
     public static void main(String[] args) {
         SpringApplication.run(SeckillApplication.class, args);

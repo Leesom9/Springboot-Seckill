@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="fl price">
                                     <i>¥</i>
-                                    <b th:text="${seckill.costPrice}"></b>
+                                    <b th:text="${seckill.killPrice}"></b>
                                     <span>原价：<b th:text="${seckill.price}"></b></span>
                                 </div>
                                 <div class="fr remark">
@@ -112,7 +112,7 @@
             seckillId: [[${seckill.seckillId}]],
             startTime: [[${seckill.startTime.time}]],//毫秒
             endTime: [[${seckill.endTime.time}]],
-            money: [[${seckill.costPrice}]] //秒杀价钱
+            money: [[${seckill.killPrice}]] //秒杀价钱
         });
     });
 </script>
