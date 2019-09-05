@@ -102,3 +102,24 @@ return "page/detail";
 
 解决方法：redis 127.0.0.1:6379> FLUSHALL 清空所有缓存，重新导入数据。
         在以后的逻辑中加入数据库更改同时使缓存同步。
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+2019-09-05 19:30
+错误-->
+描述：JavaScript中post()方法报错500，前台传递来的一个参数无法获得
+{timestamp: "2019-09-05T10:13:17.812+0000", status: 500, error: "Internal Server Error",…}
+error: "Internal Server Error"
+message: "Missing URI template variable 'money' for method parameter of type BigDecimal"
+path: "/seckill/1000/c0df1182b7b98957cca522a1c7b2e1e6/execution"
+status: 500
+timestamp: "2019-09-05T10:13:17.812+0000"
+
+原因：后台获取数据的时候，注解选择错误
+                        正确：@RequestParam
+                        错误：@PathVariable
+
+解决方法：
+@PathVariable
+获取的是请求路径中参数的值
+@RequestParam
+获取的是请求参数，一般是url问号后面的参数值

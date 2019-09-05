@@ -88,7 +88,7 @@ public class SeckillController {
     @ResponseBody
     public SeckillResult<SeckillExecution> execute(@PathVariable("seckillId") Long seckillId,
                                                    @PathVariable("md5") String md5,
-                                                   @PathVariable("money") BigDecimal money,
+                                                   @RequestParam("money") BigDecimal money,
                                                    @CookieValue(value = "killPhone", required = false) Long phone){
 
         if(null == phone){
