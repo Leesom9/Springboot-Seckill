@@ -81,7 +81,13 @@ mybatis:
     #不需要我们关心怎么进行字段匹配，mybatis会自动识别`大写字母与下划线`
     map-underscore-to-camel-case: true
 
-  # 打印sql
+# 打印sql
 logging:
   level:
     cn.tycoding.mapper: DEBUG
+
+#分页插件
+pagehelper:
+  pagehelperDialect: mysql
+  reasonable: true
+  support-methods-arguments: true

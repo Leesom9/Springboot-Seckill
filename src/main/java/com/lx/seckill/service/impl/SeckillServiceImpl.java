@@ -1,7 +1,10 @@
 package com.lx.seckill.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.lx.seckill.dto.Exposer;
 import com.lx.seckill.dto.SeckillExecution;
+import com.lx.seckill.entity.PageBean;
 import com.lx.seckill.entity.Seckill;
 import com.lx.seckill.entity.SeckillOrder;
 import com.lx.seckill.enums.SeckillStatEnum;
@@ -10,7 +13,6 @@ import com.lx.seckill.exception.SeckillCloseException;
 import com.lx.seckill.exception.SeckillException;
 import com.lx.seckill.mapper.SeckillMapper;
 import com.lx.seckill.mapper.SeckillOrderMapper;
-import com.lx.seckill.redis.RedisTemplateConfig;
 import com.lx.seckill.service.SeckillService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,6 +73,17 @@ public class SeckillServiceImpl implements SeckillService {
                 seckillMapper.queryAll();
 
         return seckillList;
+      }
+
+    @Override
+    public PageBean queryAllByPage(Seckill seckill, int pageCode, int pageSize) {
+
+        //启用Mybatis的分页插件
+        PageHelper.startPage(pageCode, pageSize);
+
+        Page<Seckill> seckillList = seckillMapper.queryAllByPage(seckill);
+
+        return new PageBean(seckillList.getTotal(),seckillList.getResult());
     }
 
     @Override

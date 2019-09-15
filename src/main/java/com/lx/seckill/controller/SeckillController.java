@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * @author ：leesom
  * @date ：Created in 2019/9/2 18:24
- * @description：controller层
+ * @description：秒杀控制类
  * @modified By：
  * @version: $
  */
@@ -36,6 +36,12 @@ public class SeckillController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
+    /***
+     * 查询所有商品信息
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     private String SeckillList(Model model){
 
@@ -45,6 +51,12 @@ public class SeckillController {
         return "page/list";
     }
 
+    /***
+     * 根据ID查询商品明细
+     * @param seckillId
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/{seckillId}/detail", method = RequestMethod.GET)
     private String SeckillDetail(@PathVariable("seckillId") Long seckillId, Model model){
 
@@ -63,6 +75,11 @@ public class SeckillController {
         return "page/detail";
     }
 
+    /***
+     * 暴露秒杀地址
+     * @param seckillId
+     * @return
+     */
     @RequestMapping(value = "{seckillId}/exposer",
                     method = RequestMethod.POST,
                     produces = {"application/json;charset=UTF-8"})
@@ -82,6 +99,14 @@ public class SeckillController {
         return result;
     }
 
+    /***
+     * 执行秒杀操作
+     * @param seckillId
+     * @param md5
+     * @param money
+     * @param phone
+     * @return
+     */
     @RequestMapping(value = "{seckillId}/{md5}/execution",
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
@@ -114,6 +139,10 @@ public class SeckillController {
         }
     }
 
+    /***
+     * 返回当前时间
+     * @return
+     */
     @RequestMapping(value = "/time/now")
     @ResponseBody
     public SeckillResult<Long> time(){

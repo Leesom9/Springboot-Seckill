@@ -1,5 +1,6 @@
 package com.lx.seckill.mapper;
 
+import com.github.pagehelper.Page;
 import com.lx.seckill.entity.Seckill;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -23,6 +24,12 @@ public interface SeckillMapper {
      * @return
      */
     List<Seckill> queryAll();
+
+    /***
+     * 分页查询所有商品
+     * @return
+     */
+    Page<Seckill> queryAllByPage(Seckill seckill);
 
     /***
      * 根据ID查询秒杀商品信息

@@ -46,3 +46,21 @@ CREATE TABLE `seckill_order`(
 
 --InnoDB是支持事务的，且InnoDB相比MyISAM在并发上更具有高性能的优点。
 --Mybatis会自动为tinyint类型的数据转换成true或false（0:false; 1 or 1+:true）。
+
+--创建用户表
+DROP TABLE IF EXISTS`seckill_user`;
+CREATE TABLE `seckill_user`(
+    `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+    `username` varchar(64) DEFAULT NULL COMMENT '账号',
+    `password` varchar(64) DEFAULT NULL COMMENT '密码',
+    `nickname` varchar(64) DEFAULT NULL COMMENT '昵称',
+    `user_phone` varchar(64) DEFAULT NULL COMMENT '电话',
+    PRIMARY KEY(`user_id`),
+    UNIQUE KEY `idx_username` (`username`),
+    UNIQUE KEY `idx_user_phone` (`user_phone`)
+)ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='会员表';
+
+INSERT INTO seckill_user
+    (username,password,nickname,user_phone)
+    VALUES
+    ('admin','admin','admin','123456');

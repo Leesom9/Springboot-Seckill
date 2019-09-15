@@ -123,3 +123,59 @@ timestamp: "2019-09-05T10:13:17.812+0000"
 获取的是请求路径中参数的值
 @RequestParam
 获取的是请求参数，一般是url问号后面的参数值
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+2019-09-05 19:30
+错误-->
+js传递url地址的时候，会将controller中class上的requestmapping(value="user")值重复两次，导致404，无法找到网页。
+描述：
+Controller：-》》
+@Controller
+@RequestMapping(value = "/user")
+public class LoginController {
+
+    @RequestMapping(value = "/index")
+    public String index() {
+        return "page/login";
+    }
+
+    @RequestMapping(value = "/login/{username}/{password}", method = RequestMethod.POST)
+    public String login(
+            @PathVariable("username") String username,
+            @PathVariable("password") String password) {
+
+        return "page/list";
+    }
+}
+
+JS：-》》
+var login = {
+    URL: {
+        login: function (username,password) {
+            return 'user/login/'+username+'/'+password;
+        }
+    }
+};
+
+URL结果：-》》
+http://localhost:8080/user/user/login/12345/12345
+
+原因：js地址的user前也要加上“/”，将url变成绝对路径，否则spring会默认自动加上一个user
+
+解决方法：
+var login = {
+    URL: {
+        login: function (username,password) {
+            return 'user/login/'+username+'/'+password;
+        }
+    }
+};
+----->>>>
+var login = {
+    URL: {
+        login: function (username,password) {
+            return '/user/login/'+username+'/'+password;
+        }
+    }
+};
+

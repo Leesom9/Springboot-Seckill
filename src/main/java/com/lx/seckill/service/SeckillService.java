@@ -2,6 +2,7 @@ package com.lx.seckill.service;
 
 import com.lx.seckill.dto.Exposer;
 import com.lx.seckill.dto.SeckillExecution;
+import com.lx.seckill.entity.PageBean;
 import com.lx.seckill.entity.Seckill;
 import com.lx.seckill.exception.RepeatKillException;
 import com.lx.seckill.exception.SeckillCloseException;
@@ -25,6 +26,16 @@ public interface SeckillService {
      * @return
      */
     List<Seckill> queryAll();
+
+
+    /***
+     * 分页查询所有商品明细
+     * @param seckill
+     * @param pageCode
+     * @param pageSize
+     * @return
+     */
+    PageBean queryAllByPage(Seckill seckill,int pageCode,int pageSize);
 
     /***
      * 按照id查询商品明细
