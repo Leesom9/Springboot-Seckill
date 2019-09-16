@@ -39,6 +39,18 @@ function userLogin(){
 
     $.post(loginUrl, {}, function (result) {
         if (result && result['success']) {
+
+            var user = result['data'];
+
+            var username = user['userName'];
+            var killPhone = user['userPhone'];
+            var nickname = user['nickName']
+
+            //将用户信息存入cookie
+            $.cookie('killPhone',killPhone,{expires:7, path:'/seckill/'});
+            $.cookie('username',username,{expires:7, path:'/seckill/'});
+            $.cookie('nickname',nickname,{expires:7, path:'/seckill/'});
+
             window.location.href = login.actionURL.success();
 
         } else {
